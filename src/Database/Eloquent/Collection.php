@@ -14,7 +14,6 @@ class Collection extends \Illuminate\Database\Eloquent\Collection
      *
      * @param mixed $key
      * @param mixed $default
-     *
      * @return Model|static
      */
     public function find($key, $default = null)
@@ -42,8 +41,6 @@ class Collection extends \Illuminate\Database\Eloquent\Collection
      * @param mixed $key
      * @param mixed $operator
      * @param mixed $value
-     *
-     * @return bool
      */
     public function contains($key, $operator = null, $value = null): bool
     {
@@ -59,8 +56,6 @@ class Collection extends \Illuminate\Database\Eloquent\Collection
     /**
      * Run a map over each of the items.
      *
-     * @param callable $callback
-     *
      * @return SupportCollection|static
      */
     public function map(callable $callback)
@@ -68,7 +63,7 @@ class Collection extends \Illuminate\Database\Eloquent\Collection
         $result = SupportCollection::map($callback);
 
         return $result->contains(function ($item) {
-            return !$item instanceof Model;
+            return ! $item instanceof Model;
         }) ? $result->toBase() : $result;
     }
 }

@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Bavix\LaravelClickHouse\Tests\Unit\Database\Eloquent;
 
-use Bavix\LaravelClickHouse\Tests\EloquentModelCastingTest;
-use Bavix\LaravelClickHouse\Tests\EloquentModelTest;
-use Bavix\LaravelClickHouse\Tests\EloquentModelWithTest;
+use Bavix\LaravelClickHouse\Tests\BaseEloquentModel;
+use Bavix\LaravelClickHouse\Tests\BaseEloquentModelCasting;
+use Bavix\LaravelClickHouse\Tests\BaseEloquentModelWith;
 use Bavix\LaravelClickHouse\Tests\Helpers;
 use Illuminate\Database\Eloquent\MassAssignmentException;
 use Illuminate\Support\Carbon;
@@ -18,7 +18,7 @@ class ModelTest extends TestCase
 
     public function testAttributeManipulation(): void
     {
-        $model = new EloquentModelTest();
+        $model = new BaseEloquentModel();
         $model->status = 'successful';
         self::assertEquals('successful', $model->status);
         self::assertTrue(isset($model->status));
@@ -35,12 +35,16 @@ class ModelTest extends TestCase
     {
         $this->expectException(MassAssignmentException::class);
 
-        new EloquentModelTest(['foo' => '1', 'bar' => 2, 'baz' => 3]);
+        new BaseEloquentModel([
+            'foo' => '1',
+            'bar' => 2,
+            'baz' => 3,
+        ]);
     }
 
     public function testDirtyOnCastOrDateAttributes(): void
     {
-        $model = new EloquentModelCastingTest();
+        $model = new BaseEloquentModelCasting();
         $model->setDateFormat('Y-m-d H:i:s');
         $model->boolAttribute = 1;
         $model->foo = 1;
@@ -63,7 +67,7 @@ class ModelTest extends TestCase
 
     public function testCalculatedAttributes(): void
     {
-        $model = new EloquentModelTest();
+        $model = new BaseEloquentModel();
         $model->password = 'secret';
         $attributes = $model->getAttributes();
         // ensure password attribute was not set to null
@@ -76,14 +80,14 @@ class ModelTest extends TestCase
 
     public function testWithMethodCallsQueryBuilderCorrectly(): void
     {
-        $result = EloquentModelWithTest::with('foo', 'bar');
+        $result = BaseEloquentModelWith::with('foo', 'bar');
         self::assertEquals('foo', $result);
     }
 
     public function testTimestampsAreReturnedAsObjectsFromPlainDatesAndTimestamps(): void
     {
         $datetime = '2012-12-04';
-        $model = new EloquentModelCastingTest();
+        $model = new BaseEloquentModelCasting();
         $model->payed_at = $datetime;
 
         self::assertInstanceOf(Carbon::class, $model->payed_at);

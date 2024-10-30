@@ -12,12 +12,12 @@ trait HasAttributes
 
     public function getDates(): array
     {
-        return $this->dates;
+        return $this->dates ?? [];
     }
 
     public function getCasts(): array
     {
-        return $this->casts;
+        return $this->casts ?? [];
     }
 
     protected function getDateFormat(): string

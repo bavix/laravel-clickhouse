@@ -1,0 +1,85 @@
+name: phpunits
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  units:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        php-versions: [8.2, 8.3]
+        laravel-versions: [^10.0, ^11.0]
+
+    services:
+      clickhouse:
+        image: clickhouse/clickhouse-server
+        env:
+          CLICKHOUSE_DEFAULT_ACCESS_MANAGEMENT: 1
+        ports:
+          - 8123:8123
+
+    steps:
+      - name: Checkout
+        id: git-checkout
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        id: php-install
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-versions }}
+          extensions: mbstring, pgsql, mysql, sqlite, redis, memcached
+          coverage: pcov
+
+      - name: Validate composer.json and composer.lock
+        id: composer-validate
+        run: composer validate --strict
+
+      - name: Cache Composer packages
+        id: composer-cache
+        uses: actions/cache@v4
+        with:
+          path: vendor
+          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-php-
+
+      - name: Install dependencies
+        id: composer-dependencies
+        run: composer req --dev laravel/framework:${{ matrix.laravel-versions }} -W || composer install
+
+      - name: Check codeclimate
+        id: codeclimate-check
+        run: echo "execute=${{ matrix.php-versions == '8.2' && matrix.caches == 'array' && matrix.databases == 'testing' }}" >> $GITHUB_OUTPUT
+
+      - name: Prepare codeclimate
+        id: codeclimate-prepare
+        run: |
+          curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+          chmod +x ./cc-test-reporter
+          ./cc-test-reporter before-build
+        if: ${{ steps.codeclimate-check.outputs.execute == 'true' }}
+
+      - name: Prepare run test suite
+        id: unit-prepare
+        run: |
+          mkdir build
+
+      - name: Run test suite
+        id: unit-run
+        run: composer parabench
+
+      - name: Send coverage
+        id: codeclimate-send
+        run: |
+          ./cc-test-reporter after-build --coverage-input-type clover --exit-code 0
+          bash <(curl -s https://codecov.io/bash)
+        env:
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+        if: ${{ steps.codeclimate-check.outputs.execute == 'true' }}

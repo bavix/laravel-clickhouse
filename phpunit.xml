@@ -1,24 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit backupGlobals="false"
-         backupStaticAttributes="false"
-         bootstrap="vendor/autoload.php"
-         colors="true"
-         convertErrorsToExceptions="true"
-         convertNoticesToExceptions="true"
-         convertWarningsToExceptions="true"
-         processIsolation="false"
-         stopOnFailure="false">
-    <testsuites>
-        <testsuite name="Unit">
-            <directory suffix="Test.php">./tests/Unit</directory>
-        </testsuite>
-    </testsuites>
-    <filter>
-        <whitelist>
-            <directory suffix=".php">src/Database/</directory>
-        </whitelist>
-    </filter>
-    <logging>
-        <log type="coverage-html" target="tests/coverage" />
-    </logging>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" bootstrap="vendor/autoload.php" backupGlobals="false" colors="true" processIsolation="false" stopOnFailure="false" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.2/phpunit.xsd" cacheDirectory=".phpunit.cache" backupStaticProperties="false">
+  <coverage>
+    <report>
+      <clover outputFile="./build/logs/clover.xml"/>
+      <html outputDirectory="./build/html/"/>
+    </report>
+  </coverage>
+  <testsuites>
+    <testsuite name="Clickhouse Suite">
+      <directory>tests</directory>
+    </testsuite>
+  </testsuites>
+  <logging/>
+  <php>
+    <env name="CLICKHOUSE_HOST" value="localhost"/>
+    <env name="CLICKHOUSE_PORT" value="8123"/>
+    <env name="CLICKHOUSE_DATABASE" value="default"/>
+    <env name="CLICKHOUSE_USERNAME" value="default"/>
+    <env name="CLICKHOUSE_PASSWORD" value=""/>
+  </php>
+  <source>
+    <include>
+      <directory suffix=".php">src/</directory>
+    </include>
+  </source>
 </phpunit>

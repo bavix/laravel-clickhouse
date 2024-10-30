@@ -4,14 +4,9 @@ declare(strict_types=1);
 
 namespace Bavix\LaravelClickHouse\Database\Query;
 
-class Pdo
+final class Pdo implements PdoInterface
 {
-    /**
-     * @param mixed $binding
-     *
-     * @return mixed
-     */
-    public function quote($binding)
+    public function quote(mixed $binding): mixed
     {
         return $binding;
     }

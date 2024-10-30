@@ -1,0 +1,23 @@
+includes:
+	- phpstan.common.neon
+	- phpstan.baseline.neon
+
+parameters:
+    level: 9
+    fileExtensions:
+        - php
+    ergebnis:
+        noParameterWithNullableTypeDeclaration:
+            enabled: false
+        noNullableReturnTypeDeclaration:
+            enabled: false
+        noParameterWithNullDefaultValue:
+            enabled: false
+        final:
+            allowAbstractClasses: true
+        noExtends:
+            classesAllowedToBeExtended:
+                # laravel
+                - Illuminate\Support\ServiceProvider
+    paths:
+        - src/

@@ -13,7 +13,7 @@ use Bavix\LaravelClickHouse\Database\Eloquent\Model;
  * @property float amount
  * @property string status
  */
-class EloquentModelTest extends Model
+class BaseEloquentModel extends Model
 {
     protected $table = 'test_table';
 

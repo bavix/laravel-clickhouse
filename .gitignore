@@ -1,4 +1,8 @@
-/vendor
-/.idea
+composer.phar
+/vendor/
 composer.lock
-tests/coverage
+.idea/
+build/
+.phpunit.result.cache
+.php_cs_cache
+.phpunit.cache/
