@@ -13,7 +13,7 @@ jobs:
     strategy:
       matrix:
         php-versions: [8.2, 8.3, 8.4, 8.5]
-        laravel-versions: [^10.0, ^11.0, ^12.0]
+        laravel-versions: [^11.0, ^12.0]
 
     services:
       clickhouse:
