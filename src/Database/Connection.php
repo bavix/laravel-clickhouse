@@ -19,4 +19,27 @@ class Connection extends \Tinderbox\ClickhouseBuilder\Integrations\Laravel\Conne
     {
         return app(PdoInterface::class);
     }
+
+    /**
+     * Insert a new record into the database.
+     *
+     * ClickHouse doesn't use parameterized queries, so we don't pass bindings
+     * to avoid Laravel's DateTime formatting which requires a grammar.
+     *
+     * @param string $query
+     * @param array<array-key, mixed> $bindings
+     * @return bool
+     */
+    public function insert($query, $bindings = [])
+    {
+        $startTime = microtime(true);
+
+        $result = $this->getClient()
+            ->writeOne($query);
+
+        // Pass empty bindings to avoid Laravel's DateTime formatting
+        $this->logQuery($query, [], microtime(true) - $startTime);
+
+        return $result;
+    }
 }

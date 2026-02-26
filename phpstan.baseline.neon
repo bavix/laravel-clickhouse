@@ -403,12 +403,6 @@ parameters:
 			path: src/Database/Eloquent/Builder.php
 
 		-
-			message: '#^Parameter \#2 \$boolean of method Bavix\\LaravelClickHouse\\Database\\Eloquent\\Builder\:\:createNestedWhere\(\) expects string, TValue\|null given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Database/Eloquent/Builder.php
-
-		-
 			message: '#^Parameter \#2 \$ids of method Illuminate\\Database\\Eloquent\\ModelNotFoundException\<Illuminate\\Database\\Eloquent\\Model\>\:\:setModel\(\) expects array\<int, int\|string\>\|int\|string, mixed given\.$#'
 			identifier: argument.type
 			count: 1
@@ -721,12 +715,6 @@ parameters:
 			path: src/Database/Eloquent/Model.php
 
 		-
-			message: '#^Method Bavix\\LaravelClickHouse\\Database\\Eloquent\\Model\:\:forceFill\(\) should return \$this\(Bavix\\LaravelClickHouse\\Database\\Eloquent\\Model\) but returns mixed\.$#'
-			identifier: return.type
-			count: 1
-			path: src/Database/Eloquent/Model.php
-
-		-
 			message: '#^Method Bavix\\LaravelClickHouse\\Database\\Eloquent\\Model\:\:getCasts\(\) is not final, but since the containing class is abstract, it should be\.$#'
 			identifier: ergebnis.finalInAbstractClass
 			count: 1
@@ -997,12 +985,6 @@ parameters:
 			path: src/Database/Eloquent/Model.php
 
 		-
-			message: '#^Method Bavix\\LaravelClickHouse\\Database\\Eloquent\\Model\:\:resolveRouteBinding\(\) should return Bavix\\LaravelClickHouse\\Database\\Eloquent\\Model\|null but returns mixed\.$#'
-			identifier: return.type
-			count: 1
-			path: src/Database/Eloquent/Model.php
-
-		-
 			message: '#^Method Bavix\\LaravelClickHouse\\Database\\Eloquent\\Model\:\:resolveRouteBindingQuery\(\) has parameter \$query with generic class Illuminate\\Database\\Eloquent\\Relations\\Relation but does not specify its types\: TRelatedModel, TDeclaringModel, TResult$#'
 			identifier: missingType.generics
 			count: 1
@@ -1011,12 +993,6 @@ parameters:
 		-
 			message: '#^Method Bavix\\LaravelClickHouse\\Database\\Eloquent\\Model\:\:resolveRouteBindingQuery\(\) is not final, but since the containing class is abstract, it should be\.$#'
 			identifier: ergebnis.finalInAbstractClass
-			count: 1
-			path: src/Database/Eloquent/Model.php
-
-		-
-			message: '#^Method Bavix\\LaravelClickHouse\\Database\\Eloquent\\Model\:\:resolveRouteBindingQuery\(\) should return Bavix\\LaravelClickHouse\\Database\\Eloquent\\Builder but returns Illuminate\\Database\\Eloquent\\Relations\\Relation\.$#'
-			identifier: return.type
 			count: 1
 			path: src/Database/Eloquent/Model.php
 
@@ -1265,3 +1241,33 @@ parameters:
 			identifier: new.static
 			count: 1
 			path: src/Database/Query/Builder.php
+
+		-
+			message: '#^Parameter \#2 \$boolean of method Bavix\\LaravelClickHouse\\Database\\Eloquent\\Builder\:\:createNestedWhere\(\) expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Database/Eloquent/Builder.php
+
+		-
+			message: '#^Method Bavix\\LaravelClickHouse\\Database\\Eloquent\\Model\:\:resolveRouteBinding\(\) should return Bavix\\LaravelClickHouse\\Database\\Eloquent\\Model\|null but returns mixed\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Database/Eloquent/Model.php
+
+		-
+			message: '#^Method Bavix\\LaravelClickHouse\\Database\\Eloquent\\Model\:\:resolveRouteBindingQuery\(\) should return Bavix\\LaravelClickHouse\\Database\\Eloquent\\Builder but returns Illuminate\\Database\\Eloquent\\Relations\\Relation\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Database/Eloquent/Model.php
+
+		-
+			message: '#^Possibly invalid array key type mixed\.$#'
+			identifier: offsetAccess.invalidOffset
+			count: 1
+			path: src/Database/Eloquent/Model.php
+
+		-
+			message: '#^Trait Illuminate\\Database\\Eloquent\\Concerns\\HasEvents requires using class to extend Illuminate\\Database\\Eloquent\\Model, but Bavix\\LaravelClickHouse\\Database\\Eloquent\\Model does not\.$#'
+			identifier: class.missingExtends
+			count: 1
+			path: src/Database/Eloquent/Model.php

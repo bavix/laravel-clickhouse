@@ -264,14 +264,14 @@ abstract class Model implements ArrayAccess, UrlRoutable, Arrayable, Jsonable, J
      *
      * @return static
      */
-    public function newFromBuilder(array $attributes = [], string $connection = null)
+    public function newFromBuilder(array $attributes = [], ?string $connection = null)
     {
         $model = $this->newInstance([], true);
 
         $model->setRawAttributes($attributes, true);
 
         $model->setConnection(
-            $connection !== null && $connection !== '' && $connection !== '0' ? $connection : $this->getConnectionName()
+            in_array($connection, [null, '', '0'], true) ? $this->getConnectionName() : $connection
         );
 
         $model->fireModelEvent('retrieved', false);
@@ -406,7 +406,7 @@ abstract class Model implements ArrayAccess, UrlRoutable, Arrayable, Jsonable, J
     /**
      * Resolve a connection instance.
      */
-    public static function resolveConnection(string $connection = null): ConnectionInterface
+    public static function resolveConnection(?string $connection = null): ConnectionInterface
     {
         return static::getConnectionResolver()->connection($connection);
     }
@@ -638,8 +638,8 @@ abstract class Model implements ArrayAccess, UrlRoutable, Arrayable, Jsonable, J
     ): Relation|Model {
         $relationship = $this->{$this->childRouteBindingRelationshipName($childType)}();
 
-        $field = $field !== null && $field !== '' && $field !== '0' ? $field : $relationship->getRelated()
-            ->getRouteKeyName();
+        $field = in_array($field, [null, '', '0'], true) ? $relationship->getRelated()
+            ->getRouteKeyName() : $field;
 
         if ($relationship instanceof HasManyThrough ||
             $relationship instanceof BelongsToMany) {
