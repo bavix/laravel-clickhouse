@@ -4,11 +4,16 @@
 [![License](https://poser.pugx.org/bavix/laravel-clickhouse/license)](https://packagist.org/packages/bavix/laravel-clickhouse)
 [![composer.lock](https://poser.pugx.org/bavix/laravel-clickhouse/composerlock)](https://packagist.org/packages/bavix/laravel-clickhouse)
 
+> [!WARNING]
+> **This project is provided "As Is".**  
+> The maintainers are not actively developing new features or fixing bugs.  
+> **Pull Requests are welcome!** If you need a fix or feature, please submit a PR with tests.
+
 Laravel Clickhouse - Eloquent model for ClickHouse.
 
 * **Vendor**: bavix
 * **Package**: laravel-clickhouse
-* **[Composer](https://getcomposer.org/):** `composer require bavix/laravel-wallet-uuid`
+* **[Composer](https://getcomposer.org/):** `composer require bavix/laravel-clickhouse`
 
 > [!IMPORTANT]
 > I recommend using the standard postgres/mysql interface for clickhouse. More details here: https://clickhouse.com/docs/en/interfaces/mysql

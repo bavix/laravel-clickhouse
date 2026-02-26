@@ -271,7 +271,7 @@ abstract class Model implements ArrayAccess, UrlRoutable, Arrayable, Jsonable, J
         $model->setRawAttributes($attributes, true);
 
         $model->setConnection(
-            $connection !== null && $connection !== '' && $connection !== '0' ? $connection : $this->getConnectionName()
+            in_array($connection, [null, '', '0'], true) ? $this->getConnectionName() : $connection
         );
 
         $model->fireModelEvent('retrieved', false);
@@ -451,7 +451,7 @@ abstract class Model implements ArrayAccess, UrlRoutable, Arrayable, Jsonable, J
         return $this;
     }
 
-    public function resolveRouteBinding($value, ?string $field = null): ?Model
+    public function resolveRouteBinding($value, $field = null): ?Model
     {
         return $this->resolveRouteBindingQuery($this, $value, $field)
             ->first();
@@ -638,8 +638,8 @@ abstract class Model implements ArrayAccess, UrlRoutable, Arrayable, Jsonable, J
     ): Relation|Model {
         $relationship = $this->{$this->childRouteBindingRelationshipName($childType)}();
 
-        $field = $field !== null && $field !== '' && $field !== '0' ? $field : $relationship->getRelated()
-            ->getRouteKeyName();
+        $field = in_array($field, [null, '', '0'], true) ? $relationship->getRelated()
+            ->getRouteKeyName() : $field;
 
         if ($relationship instanceof HasManyThrough ||
             $relationship instanceof BelongsToMany) {

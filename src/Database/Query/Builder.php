@@ -134,7 +134,7 @@ class Builder extends BaseBuilder
                         'orders' => [],
                         'limit' => null,
                     ])
-                    ->select(new Expression('1')), null
+                    ->select(new Expression('1'))
             )
             ->count();
     }
