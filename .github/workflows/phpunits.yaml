@@ -12,7 +12,7 @@ jobs:
 
     strategy:
       matrix:
-        php-versions: [8.2, 8.3, 8.4]
+        php-versions: [8.2, 8.3, 8.4, 8.5]
         laravel-versions: [^10.0, ^11.0, ^12.0]
 
     services:
@@ -55,7 +55,7 @@ jobs:
 
       - name: Check codeclimate
         id: codeclimate-check
-        run: echo "execute=${{ matrix.php-versions == '8.2' && matrix.caches == 'array' && matrix.databases == 'testing' }}" >> $GITHUB_OUTPUT
+        run: echo "execute=${{ matrix.php-versions == '8.5' && matrix.caches == 'array' && matrix.databases == 'testing' }}" >> $GITHUB_OUTPUT
 
       - name: Prepare codeclimate
         id: codeclimate-prepare

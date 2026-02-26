@@ -264,7 +264,7 @@ abstract class Model implements ArrayAccess, UrlRoutable, Arrayable, Jsonable, J
      *
      * @return static
      */
-    public function newFromBuilder(array $attributes = [], string $connection = null)
+    public function newFromBuilder(array $attributes = [], ?string $connection = null)
     {
         $model = $this->newInstance([], true);
 
@@ -406,7 +406,7 @@ abstract class Model implements ArrayAccess, UrlRoutable, Arrayable, Jsonable, J
     /**
      * Resolve a connection instance.
      */
-    public static function resolveConnection(string $connection = null): ConnectionInterface
+    public static function resolveConnection(?string $connection = null): ConnectionInterface
     {
         return static::getConnectionResolver()->connection($connection);
     }
@@ -451,7 +451,7 @@ abstract class Model implements ArrayAccess, UrlRoutable, Arrayable, Jsonable, J
         return $this;
     }
 
-    public function resolveRouteBinding($value, $field = null): ?Model
+    public function resolveRouteBinding($value, ?string $field = null): ?Model
     {
         return $this->resolveRouteBindingQuery($this, $value, $field)
             ->first();
