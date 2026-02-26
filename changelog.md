@@ -1,5 +1,13 @@
 # Changelog
 
+## 3.1.0 - 2026-02-26
+
+### What's Changed
+
+* add support php 8.4 by [@rez1dent3](https://github.com/rez1dent3) in https://github.com/bavix/laravel-clickhouse/pull/17
+
+**Full Changelog**: https://github.com/bavix/laravel-clickhouse/compare/3.0.5...3.1.0
+
 ## 3.0.5 - 2025-05-27
 
 ### What's Changed
