@@ -2,9 +2,11 @@ name: phpunits
 
 on:
   push:
-    branches: [ master ]
+    branches:
+      - master
   pull_request:
-    branches: [ master ]
+    branches:
+      - master
 
 jobs:
   units:
@@ -13,7 +15,10 @@ jobs:
     strategy:
       matrix:
         php-versions: [8.2, 8.3, 8.4, 8.5]
-        laravel-versions: [^11.0, ^12.0]
+        laravel-versions: [^11.0, ^12.0, ^13.0]
+        exclude:
+          - laravel-versions: ^13.0
+            php-versions: 8.2
 
     services:
       clickhouse:
