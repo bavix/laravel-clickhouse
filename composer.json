@@ -1,65 +1,65 @@
 {
-  "name": "bavix/laravel-clickhouse",
-  "description": "Eloquent model for ClickHouse",
-  "type": "library",
-  "license": "MIT",
-  "keywords": [
-    "laravel",
-    "clickhouse",
-    "eloquent"
-  ],
-  "require": {
-    "php": "^8.2",
-    "laravel/framework": "^11.0|^12.0",
-    "bavix/clickhouse-builder": "^6.2",
-    "bavix/clickhouse-php-client": "^3.2",
-    "ext-json": "*"
-  },
-  "require-dev": {
-    "driftingly/rector-laravel": "^1.0|^2.0",
-    "ergebnis/phpstan-rules": "^2.1",
-    "infection/infection": "~0.27",
-    "larastan/larastan": "^2.0|^3.0",
-    "nunomaduro/collision": "^7.0|^8.0",
-    "orchestra/testbench": "^8.0|^9.0|^10.0",
-    "phpstan/phpstan": "^1.0|^2.0",
-    "phpunit/phpunit": "^10.5|^11.0",
-    "rector/rector": "^1.0|^2.0",
-    "symplify/easy-coding-standard": "^12.1",
-    "mockery/mockery": "^1.6",
-    "fakerphp/faker": "^1.23"
-  },
-  "autoload": {
-    "psr-4": {
-      "Bavix\\LaravelClickHouse\\": "src/"
+    "name": "bavix/laravel-clickhouse",
+    "description": "Eloquent model for ClickHouse",
+    "type": "library",
+    "license": "MIT",
+    "keywords": [
+        "laravel",
+        "clickhouse",
+        "eloquent"
+    ],
+    "require": {
+        "php": "^8.2",
+        "laravel/framework": "^11.0|^12.0|^13.0",
+        "bavix/clickhouse-builder": "^6.2",
+        "bavix/clickhouse-php-client": "^3.2",
+        "ext-json": "*"
+    },
+    "require-dev": {
+        "driftingly/rector-laravel": "^1.0|^2.0",
+        "ergebnis/phpstan-rules": "^2.1",
+        "infection/infection": "~0.27",
+        "larastan/larastan": "^2.0|^3.0",
+        "nunomaduro/collision": "^7.0|^8.0",
+        "orchestra/testbench": "^8.0|^9.0|^10.0|^11.0",
+        "phpstan/phpstan": "^1.0|^2.0",
+        "phpunit/phpunit": "^10.5|^11.0|^12.5.12",
+        "rector/rector": "^1.0|^2.0",
+        "symplify/easy-coding-standard": "^12.1|^13.0",
+        "mockery/mockery": "^1.6",
+        "fakerphp/faker": "^1.23"
+    },
+    "autoload": {
+        "psr-4": {
+            "Bavix\\LaravelClickHouse\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Bavix\\LaravelClickHouse\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Bavix\\LaravelClickHouse\\ClickHouseServiceProvider"
+            ]
+        }
+    },
+    "scripts": {
+        "parabench": "@php ./vendor/bin/testbench package:test --coverage-xml=build/coverage-xml --log-junit=build/junit.xml",
+        "infect": "@php vendor/bin/infection --coverage=build --min-msi=50 -j$(nproc) --only-covering-test-cases",
+        "phpstan": "@php vendor/bin/phpstan analyse -vvv --memory-limit 2G -c phpstan.neon",
+        "phpstan-baseline": "@php vendor/bin/phpstan analyse -vvv --memory-limit 2G -c phpstan.neon --generate-baseline phpstan.baseline.neon",
+        "ecs": "@php vendor/bin/ecs check",
+        "ecs-fix": "@php vendor/bin/ecs check --fix",
+        "ecs-cc": "@php vendor/bin/ecs --clear-cache",
+        "rector": "@php vendor/bin/rector process --dry-run",
+        "rector-fix": "@php vendor/bin/rector process"
+    },
+    "config": {
+        "allow-plugins": {
+            "infection/extension-installer": true
+        }
     }
-  },
-  "autoload-dev": {
-    "psr-4": {
-      "Bavix\\LaravelClickHouse\\Tests\\": "tests/"
-    }
-  },
-  "extra": {
-    "laravel": {
-      "providers": [
-        "Bavix\\LaravelClickHouse\\ClickHouseServiceProvider"
-      ]
-    }
-  },
-  "scripts": {
-    "parabench":"@php ./vendor/bin/testbench package:test --coverage-xml=build/coverage-xml --log-junit=build/junit.xml",
-    "infect": "@php vendor/bin/infection --coverage=build --min-msi=50 -j$(nproc) --only-covering-test-cases",
-    "phpstan": "@php vendor/bin/phpstan analyse -vvv --memory-limit 2G -c phpstan.neon",
-    "phpstan-baseline": "@php vendor/bin/phpstan analyse -vvv --memory-limit 2G -c phpstan.neon --generate-baseline phpstan.baseline.neon",
-    "ecs": "@php vendor/bin/ecs check",
-    "ecs-fix": "@php vendor/bin/ecs check --fix",
-    "ecs-cc": "@php vendor/bin/ecs --clear-cache",
-    "rector": "@php vendor/bin/rector process --dry-run",
-    "rector-fix": "@php vendor/bin/rector process"
-  },
-  "config": {
-    "allow-plugins": {
-      "infection/extension-installer": true
-    }
-  }
 }
