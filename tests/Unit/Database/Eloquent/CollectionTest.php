@@ -200,8 +200,8 @@ class CollectionTest extends TestCase
             [5],
             [tap(new BaseEloquentModelCasting(), function (BaseEloquentModelCasting $model) {
                 $model->id = 5;
-            }), ],
-            [1, 5],
+            })],
+            [1],
         ];
     }
 
