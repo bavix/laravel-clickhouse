@@ -1,13 +1,13 @@
 version: 2
 updates:
-- package-ecosystem: composer
-  directory: "/"
-  schedule:
-    interval: daily
-    groups:
-      npm:
-        patterns:
-          - "*"
+  - package-ecosystem: composer
+    directory: "/"
+    schedule:
+      interval: daily
+      groups:
+        composer:
+          patterns:
+            - "*"
     open-pull-requests-limit: 10
     commit-message:
       prefix: "chore(php-deps)"
