@@ -4,10 +4,10 @@ updates:
     directory: "/"
     schedule:
       interval: daily
-      groups:
-        composer:
-          patterns:
-            - "*"
+    groups:
+      composer:
+        patterns:
+          - "*"
     open-pull-requests-limit: 10
     commit-message:
       prefix: "chore(php-deps)"
